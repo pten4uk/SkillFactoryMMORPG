@@ -27,10 +27,18 @@
       <div class="col-md-3 text-end">
           {% if request.user.is_authenticated %}
               <button type="button" class="btn btn-outline-primary me-2 bg-light text-dark">{{ request.user }}</button>
-              <button type="button" class="btn btn-primary">Выйти</button>
+              <a href="{% url 'account_logout' %}"><button type="button" class="btn btn-primary">Выйти</button></a>
           {% else %}
-              <button type="button" class="btn btn-outline-primary me-2">Войти</button>
-              <button type="button" class="btn btn-primary">Регистрация</button>
+              <a href="{% url 'account_login' %}">
+                  <button type="button" class="btn btn-outline-primary me-2">
+                      Войти
+                  </button>
+              </a>
+              <a href="{% url 'account_signup' %}">
+                  <button type="button" class="btn btn-primary">
+                      Регистрация
+                  </button>
+              </a>
           {% endif %}
       </div>
     </header>
