@@ -1,0 +1,4 @@
+__pycache__/
+/venv/
+.idea/
+/mmorpg/db.sqlite3
