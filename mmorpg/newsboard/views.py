@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import ListView, CreateView
 
 from .models import Post
@@ -12,5 +11,6 @@ class PostList(ListView):
 class PostCreate(CreateView):
     model = Post
     template_name = 'newspaper/post_create.html'
+
 
 
