@@ -16,7 +16,7 @@
       </a>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Новости</a></li>
+        <li><a href="{% url 'newsboard:home' %}" class="nav-link px-2 link-secondary">Новости</a></li>
 
         {% if request.user.is_authenticated %}
             <li><a href="#" class="nav-link px-2 link-dark">Мои отклики</a></li>
@@ -44,21 +44,15 @@
     </header>
   </div>
 
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success" role="alert">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
 {% block content %}
 {% endblock content %}
 
-<div class="container">
-  <footer class="py-3 my-4">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item"><a class="nav-link active" href="#">Новости</a></li>
-
-        {% if request.user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link active" href="#">Мои отклики</a></li>
-        {% endif %}
-
-    </ul>
-    <p class="text-center text-muted">© Сайт создан в 2021 году</p>
-  </footer>
-</div>
+{% include 'template_particles/footer.html' %}
 </body>
 </html>

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-m0-7@3ih*jq*6n0mwgoj%h^4q1kn8=fv1mnry(l^g$-7&!cej5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.vk',
 
     'newsboard.apps.NewsboardConfig',
     'authentication.apps.AuthenticationConfig',
@@ -111,13 +112,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = 'newsboard:newsboard'
-ACCOUNT_LOGOUT_REDIRECT_URL = 'newsboard:newsboard'
+LOGIN_URL = 'auth/login'
+LOGIN_REDIRECT_URL = 'newsboard:home'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'newsboard:home'
 ACCOUNT_LOGOUT_ON_GET = True
 
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_CONFIRMATION_COOLDOWN = 60*10
 
-# Internationalization
-# https://docs.djangoproject.com/en/3.2/topics/i18n/
+ACCOUNT_FORMS = {
+    'login': 'authentication.forms.CustomLoginForm',
+    'signup': 'authentication.forms.CustomSignupForm'
+}
+
 
 LANGUAGE_CODE = 'ru'
 
@@ -141,3 +150,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# EMAIL_HOST = 'smtp.yandex.ru'
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = 'pten4ik99'
+# EMAIL_HOST_PASSWORD = 'hrgjyugqdsddllcf'
+# EMAIL_USE_SSL = True

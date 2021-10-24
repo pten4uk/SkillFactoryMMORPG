@@ -4,5 +4,5 @@ from .views import PostList
 
 app_name = 'newsboard'
 urlpatterns = [
-    path('', PostList.as_view(), name='newsboard'),
+    path('', PostList.as_view(), name='home'),
 ]
