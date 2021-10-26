@@ -1,6 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render
 from django.urls import reverse
+from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
 
 from .forms import PostCreateForm
@@ -46,7 +48,14 @@ class PostUpdate(UpdateView):
         return super().form_valid(form)
 
 
-class CommentsList(ListView):
-    model = Comment
-    template_name = 'newsboard/post_comments.html'
-    ordering = ('-datetime_of_creation')
+class CommentsList(View):
+    def get(self, request, *args, **kwargs):
+        post_pk = kwargs['post_pk']
+        post = Post.objects.get(pk=post_pk)
+        qs = Comment.objects.filter(post=post)
+        print(qs)
+        context = {
+            'comments': qs,
+            'post': post
+        }
+        return render(request, 'newsboard/post_comments.html', context)

@@ -41,7 +41,7 @@
                             <div class="card-header">Панель управления записью</div>
                             <div class="card-body">
                                 {% if post in user.post_set.all %}
-                                <a href="#">
+                                <a href="{% url 'newsboard:post_comments' post.pk %}">
                                 <button type="button" class="btn btn-lg btn-outline-primary position-relative me-sm-3 mb-sm-3 mt-3">
                                     Отклики
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
