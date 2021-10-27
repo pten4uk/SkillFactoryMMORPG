@@ -35,35 +35,39 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                {% if user.is_authenticated %}
                     <div class="container">
                         <div class="card me-5">
                             <div class="card-header">Панель управления записью</div>
                             <div class="card-body">
                                 {% if post in user.post_set.all %}
-                                <a href="{% url 'newsboard:post_comments' post.pk %}">
-                                <button type="button" class="btn btn-lg btn-outline-primary position-relative me-sm-3 mb-sm-3 mt-3">
-                                    Отклики
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    {{ post.comment_set.all|length }}
-                                    </span>
-                                </button>
-                                </a>
-                                <a href="{% url 'newsboard:update' post.pk %}">
-                                    <button class="btn btn-lg btn-outline-primary me-sm-3 mb-sm-3 mt-3">
-                                        Редактировать
+                                    <a href="{% url 'newsboard:post_comments' post.pk %}">
+                                    <button type="button" class="btn btn-lg btn-outline-primary position-relative me-sm-3 mb-sm-3 mt-3">
+                                        Отклики
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ post.comment_set.all|length }}
+                                        </span>
                                     </button>
-                                </a>
-                                <a href="#">
-                                    <button class="btn btn-lg btn-outline-danger me-sm-3 mb-sm-3 mt-3">
-                                        Удалить
-                                    </button>
-                                </a>
+                                    </a>
+                                    <a href="{% url 'newsboard:update' post.pk %}">
+                                        <button class="btn btn-lg btn-outline-primary me-sm-3 mb-sm-3 mt-3">
+                                            Редактировать
+                                        </button>
+                                    </a>
+                                    <a href="#">
+                                        <button class="btn btn-lg btn-outline-danger me-sm-3 mb-sm-3 mt-3">
+                                            Удалить
+                                        </button>
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'newsboard:comment_create' post.pk %}">
+                                        <button class="btn btn-lg btn-outline-primary me-sm-3 mb-sm-3 mt-3">
+                                            Откликнуться
+                                        </button>
+                                    </a>
                                 {% endif %}
                             </div>
                         </div>
                     </div>
-                {% endif %}
             </div>
         </div>
 

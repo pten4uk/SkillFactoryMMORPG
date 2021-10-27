@@ -14,6 +14,7 @@ class Post(models.Model):
     date_of_creation = models.DateField(auto_now_add=True)
     time_of_creation = models.TimeField(auto_now_add=True)
     datetime_of_creation = models.DateTimeField(auto_now_add=True)
+
     date_of_last_update = models.DateField(auto_now=True)
     time_of_last_update = models.TimeField(auto_now=True)
     datetime_of_last_update = models.DateTimeField(auto_now=True)
@@ -31,13 +32,17 @@ class Category(models.Model):
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    text = models.TextField()
+    text = models.TextField(max_length=1500)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    confirmed = models.BooleanField('Подтвержден', null=True, blank=True)
 
     date_of_creation = models.DateField(auto_now_add=True)
     time_of_creation = models.TimeField(auto_now_add=True)
+    datetime_of_creation = models.DateTimeField(auto_now_add=True)
+
     date_of_last_update = models.DateField(auto_now=True)
     time_of_last_update = models.TimeField(auto_now=True)
+    datetime_of_last_update = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'{self.author} {self.date_of_creation} {self.time_of_creation.__format__("%H:%M:%S")}'

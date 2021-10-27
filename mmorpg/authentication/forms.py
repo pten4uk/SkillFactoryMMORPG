@@ -123,6 +123,8 @@ class CustomSignupForm(SignupForm):
 
         if '@' not in email or '.' not in email:
             raise forms.ValidationError('Неверный формат email адреса')
+        elif User.objects.filter(email=email):
+            raise forms.ValidationError('Такой адрес email уже существует')
 
         return email
 
@@ -132,5 +134,20 @@ class CustomSignupForm(SignupForm):
 
         if username == email:
             raise forms.ValidationError('Имя пользователя не может быть таким же как email адрес')
+        elif User.objects.filter(username=username):
+            raise forms.ValidationError('Такое имя пользователя уже существует')
 
         return username
+
+    def clean(self):
+        password1 = self.cleaned_data['password1']
+        password2 = self.cleaned_data['password2']
+
+        if password1 != password2:
+            raise forms.ValidationError('Пароли не совпадают')
+        elif password1.islower():
+            raise forms.ValidationError('Пароль должен содержать хотя бы одну заглавную букву')
+        elif len(password1) < 8:
+            raise forms.ValidationError('Пароль должен быть не короче 8-ми символов')
+
+        return self.cleaned_data
