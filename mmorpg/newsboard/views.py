@@ -1,6 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
