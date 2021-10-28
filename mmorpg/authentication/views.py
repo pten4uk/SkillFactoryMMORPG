@@ -11,10 +11,6 @@ User = get_user_model()
 class CustomLogin(LoginView):
     form_class = CustomLoginForm
 
-    def post(self, request, *args, **kwargs):
-        print(request.POST)
-        return super().post(request, *args, **kwargs)
-
 
 class CustomSignup(SignupView):
     form_class = CustomSignupForm

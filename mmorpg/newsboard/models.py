@@ -40,9 +40,5 @@ class Comment(models.Model):
     time_of_creation = models.TimeField(auto_now_add=True)
     datetime_of_creation = models.DateTimeField(auto_now_add=True)
 
-    date_of_last_update = models.DateField(auto_now=True)
-    time_of_last_update = models.TimeField(auto_now=True)
-    datetime_of_last_update = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return f'{self.author} {self.date_of_creation} {self.time_of_creation.__format__("%H:%M:%S")}'
