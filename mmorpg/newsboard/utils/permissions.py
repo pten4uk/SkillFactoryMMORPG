@@ -21,7 +21,6 @@ class IsAuthorMixin(LoginRequiredMixin):
 
         if post_pk:
             pks_dict = request.user.post_set.all().values('pk')
-            print(pks_dict)
             if post_pk not in self.get_pk_list(pks_dict):
                 return self.handle_no_permission()
 

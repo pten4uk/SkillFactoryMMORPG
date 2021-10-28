@@ -69,9 +69,11 @@ class CommentsList(IsAuthorMixin, View):
 class CommentCreate(NotIsAuthorMixin, View):
     def get(self, request, **kwargs):
         form = CommentCreateForm(request.POST or None)
+        post = Post.objects.get(pk=kwargs['post_pk'])
 
         context = {
-             'form': form
+             'form': form,
+             'post': post
          }
 
         return render(request, 'newsboard/comment_create.html', context)

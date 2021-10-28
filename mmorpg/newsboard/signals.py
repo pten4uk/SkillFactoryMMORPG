@@ -8,11 +8,12 @@ from newsboard.models import Comment
 
 @receiver(post_save, sender=Comment)
 def send_mail(sender, instance, created, **kwargs):
-    if not created:
+
+    if created:
         user = instance.post.author
 
         html = render_to_string(
-            'newspaper/send_messages/new_comment.html',
+            'newsboard/messages/new_comment.html',
             {
                 'user': user,
                 'comment': instance,
@@ -20,7 +21,26 @@ def send_mail(sender, instance, created, **kwargs):
         )
 
         msg = EmailMultiAlternatives(
-                subject=f'Вы получили новый отклик!"',
+                subject=f'Вы получили новый отклик!',
+                from_email='pten4ik99@yandex.ru',
+                to=[user.email]
+            )
+
+        msg.attach_alternative(html, 'text/html')
+        msg.send()
+    else:
+        user = instance.author
+
+        html = render_to_string(
+            'newsboard/messages/update_comment.html',
+            {
+                'user': user,
+                'comment': instance,
+             },
+        )
+
+        msg = EmailMultiAlternatives(
+                subject=f'Обновлен статус вашего отклика!',
                 from_email='pten4ik99@yandex.ru',
                 to=[user.email]
             )
