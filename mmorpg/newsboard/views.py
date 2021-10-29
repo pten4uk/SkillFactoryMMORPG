@@ -116,3 +116,11 @@ class CommentReject(IsAuthorMixin, View):
 
 class CommentDelete(DeleteView):
     pass
+
+
+class MyComments(View):
+    def get(self, request, *args, **kwargs):
+        context = {
+            'posts': request.user.post_set.all(),
+        }
+        return render(request, 'newsboard/my_comments.html', context)

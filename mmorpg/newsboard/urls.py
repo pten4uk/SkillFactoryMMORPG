@@ -18,5 +18,6 @@ urlpatterns = [
     path('<int:post_pk>/comments/<int:comment_pk>/confirm', CommentConfirm.as_view(), name='comment_confirm'),
     path('<int:post_pk>/comments/<int:comment_pk>/reject', CommentReject.as_view(), name='comment_reject'),
     path('<int:post_pk>/comments/<int:comment_pk>/delete', CommentDelete.as_view(), name='comment_delete'),
+    path('my_comments/', MyComments.as_view(), name='my_comments'),
     # -----------------endcomments---------------------
 ]

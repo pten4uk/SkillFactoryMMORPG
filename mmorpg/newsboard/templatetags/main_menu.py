@@ -11,7 +11,7 @@ def get_items_for_main_menu(request):
     ]
 
     if is_authenticated:
-        ITEMS.append({'title': 'Мои отклики', 'url_name': 'newsboard:home'})
+        ITEMS.append({'title': 'Мои отклики', 'url_name': 'newsboard:my_comments'})
         ITEMS.append({'title': 'Добавить новость', 'url_name': 'newsboard:create'})
 
     return ITEMS
